@@ -1,37 +1,54 @@
-package main;  // Указание пакета main
-
-import product.Product;  // Импортируем класс Product из пакета product
+package main;
+import product.Product;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Создаем список продуктов вручную
         List<Product> products = new ArrayList<>();
         products.add(new Product(1, "Apple", "Fruit Corp", 10.0, 30, 100));
         products.add(new Product(2, "Banana", "Tropical Foods", 8.5, 25, 150));
         products.add(new Product(3, "Milk", "Dairy Farm", 3.0, 10, 200));
         products.add(new Product(4, "Bread", "Baker's Best", 1.5, 5, 50));
         products.add(new Product(5, "Cheese", "Cheese Factory", 5.0, 40, 120));
+        products.add(new Product(6, "Bread", "Cheese Factory", 5.0, 70, 120));
 
-        // Вызовы методов для отображения данных
-        System.out.println("a) Список товаров по наименованию:");
-        String searchName = "Apple";
-        printProductsByName(products, searchName);
+        products.add(new Product(7, "Milk", "Fruit Corp", 12.0, 30, 100));
+        products.add(new Product(8, "Bread", "Tropical bread", 20, 25, 150));
+        products.add(new Product(9, "Milk", "Dairy Farm", 30.0, 40, 200));
+        products.add(new Product(10, "Bread", "Baker's Best", 15, 5, 50));
+        products.add(new Product(11, "Cheese", "Cheese Factory", 7.0, 40, 120));
+        products.add(new Product(12, "Bread", "Cheese Factory", 8.0, 70, 120));
 
-        System.out.println("\nb) Список товаров по наименованию и цене до:");
-        String nameForPrice = "Banana";
-        double maxPrice = 9.0;
-        printProductsByNameAndPrice(products, nameForPrice, maxPrice);
 
-        System.out.println("\nc) Список товаров с сроком хранения более:");
-        int minShelfLife = 20;
-        printProductsByShelfLife(products, minShelfLife);
+
+
+        Scanner scanner = new Scanner(System.in);//об'єкт для зчитування
+
+        System.out.println("a) Введіть найменування товару:");
+        String searchName = scanner.nextLine();
+        printProductsByName(products, searchName);  //метод для виведення товарів з вказаним найменуванням
+
+
+
+        System.out.println("\nb) Введіть найменування товару для пошуку за ціною:");
+        String nameForPrice = scanner.nextLine();
+        System.out.println("Введіть максимальну ціну:");
+        double maxPrice = scanner.nextDouble();
+        printProductsByNameAndPrice(products, nameForPrice, maxPrice);  //фільтрація товарів
+
+
+
+        System.out.println("\nc) Введіть мінімальний термін зберігання (дні):");
+        int minShelfLife = scanner.nextInt();
+        printProductsByShelfLife(products, minShelfLife);  // фільтрація
+
+        scanner.close();
     }
 
-    // Методы для отображения товаров
     public static void printProductsByName(List<Product> products, String name) {
-        boolean found = false;
+        boolean found = false;  // перевірка наявності товару
         for (Product product : products) {
             if (product.getName().equalsIgnoreCase(name)) {
                 System.out.println(product);
@@ -39,7 +56,7 @@ public class Main {
             }
         }
         if (!found) {
-            System.out.println("Товаров с таким названием не найдено.");
+            System.out.println("Товарів з таким найменуванням не знайдено.");
         }
     }
 
@@ -52,10 +69,11 @@ public class Main {
             }
         }
         if (!found) {
-            System.out.println("Товаров с таким названием и ценой не найдено.");
+            System.out.println("Товарів з таким найменуванням та ціною не знайдено.");
         }
     }
 
+    // виведення товарів з терміном зберігання більше заданого
     public static void printProductsByShelfLife(List<Product> products, int minShelfLife) {
         boolean found = false;
         for (Product product : products) {
@@ -65,7 +83,7 @@ public class Main {
             }
         }
         if (!found) {
-            System.out.println("Товаров с сроком хранения более " + minShelfLife + " дней не найдено.");
+            System.out.println("Товарів з терміном зберігання більше " + minShelfLife + " днів не знайдено.");
         }
     }
 }

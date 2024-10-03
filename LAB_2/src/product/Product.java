@@ -1,4 +1,4 @@
-package product;  // Указание пакета product
+package product;
 
 public class Product {
 
@@ -9,7 +9,6 @@ public class Product {
     private int shelfLife;
     private int quantity;
 
-    // Конструктор
     public Product(int id, String name, String manufacturer, double price, int shelfLife, int quantity) {
         this.id = id;
         this.name = name;
@@ -19,7 +18,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-    // Геттеры
+    // Геттери для доступу до приватних полів
     public int getId() {
         return id;
     }
@@ -44,7 +43,7 @@ public class Product {
         return quantity;
     }
 
-    // Сеттеры
+    // Сеттери для зміни полів
     public void setId(int id) {
         this.id = id;
     }
@@ -69,7 +68,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-    // Переопределение toString для отображения информации о продукте
+    // Перевизначення методу toString для зручного відображення інформації про продукт
     @Override
     public String toString() {
         return "Product{id=" + id + ", name='" + name + '\'' + ", manufacturer='" + manufacturer + '\'' +
